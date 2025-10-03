@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  body {
+    background: #f1bb07; /* dark gray background */
+    font-family: "Montserrat", sans-serif;
+    color: #f5f5f5; /* light text */
+  }
+
+  .container {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.7); /* slightly lighter gray card */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Decorative gold accents */
+  .container::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, #ebb002 30%, transparent 70%);
+    opacity: 0.3;
+    border-radius: 50%;
+  }
+
+  .container::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, #b8860b 30%, transparent 70%);
+    opacity: 0.3;
+    border-radius: 50%;
+  }
+
+  h2 {
+    color: #eeece9; /* gold heading */
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+
+  h3 {
+    margin-top: 25px;
+    color: #f5f5f5;
+    border-bottom: 1px solid #b8860b;
+    padding-bottom: 5px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    text-align: left;
+  }
+
+  ul li {
+    background: #fdfcfc; /* dark gray items */
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1d1212;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  ul li strong {
+    color: #b8860b; /* gold for labels */
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 25px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #b8860b, #ffd700); /* gold gradient */
+    color: #1e1e1e; /* dark text for contrast */
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(184, 134, 11, 0.5);
+  }
+
+  .btn:hover {
+    background: linear-gradient(135deg, #ffd700, #b8860b);
+    box-shadow: 0 6px 12px rgba(184, 134, 11, 0.6);
+  }
+</style>
+
+<div class="container">
+  <h2>Order Confirmed!</h2>
+  <p>Thank you, {{ user_info.name }}. Your order has been placed.</p>
+
+  <h3>Your Details</h3>
+  <ul>
+    <li><strong>Name:</strong> {{ user_info.name }}</li>
+    <li><strong>Address:</strong> {{ user_info.address }}</li>
+    <li><strong>Phone:</strong> {{ user_info.phone }}</li>
+    <li><strong>Email:</strong> {{ user_info.email }}</li>
+  </ul>
+
+  <h3>Seller Information</h3>
+  <ul>
+    <li><strong>Name:</strong> {{ seller_info.name }}</li>
+    <li><strong>Address:</strong> {{ seller_info.address }}</li>
+    <li><strong>Phone:</strong> {{ seller_info.phone }}</li>
+    <li><strong>Email:</strong> {{ seller_info.email }}</li>
+  </ul>
+
+  <a href="{{ url_for('home') }}" class="btn">
+    Back to Home
+  </a>
+</div>
+{% endblock %}

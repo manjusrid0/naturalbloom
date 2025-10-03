@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+body {
+  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%); /* light gray gradient */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.about-hero {
+  background: linear-gradient(120deg, #f8f8f8 0%, #ffffff 100%); /* subtle white/gray */
+  padding: 48px 0 32px 0;
+  text-align: center;
+  border-radius: 0 0 32px 32px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-hero::before {
+  content: "";
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  width: 120px;
+  height: 120px;
+  background: rgba(191,168,0,0.18); /* gold circle */
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.about-hero::after {
+  content: "";
+  position: absolute;
+  right: 8%;
+  bottom: 8%;
+  width: 90px;
+  height: 90px;
+  background: rgba(168,143,0,0.13); /* darker gold */
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.about-hero h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #222; /* dark gray */
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-hero p {
+  font-size: 1.2rem;
+  color: #555; /* medium gray */
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.about-section {
+  max-width: 950px;
+  margin: 40px auto 0 auto;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.about-card {
+  background: #ffffff; /* white card */
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 36px 32px;
+  flex: 1 1 320px;
+  min-width: 280px;
+  max-width: 420px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card::before {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 80px;
+  height: 80px;
+  background: rgba(191,168,0,0.10); /* subtle gold */
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.about-card h2 {
+  color: #bfa800; /* gold title */
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+
+.about-card p, .about-card ul {
+  color: #333; /* dark gray text */
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-card ul {
+  padding-left: 18px;
+}
+
+.about-img-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f8f8; /* light gray card */
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 24px;
+  min-width: 220px;
+  max-width: 320px;
+  margin-bottom: 24px;
+}
+
+.about-img-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+@media (max-width: 900px) {
+  .about-section { flex-direction: column; gap: 0; padding: 0 10px; }
+  .about-card, .about-img-card { margin: 0 auto 24px auto; }
+}
+</style>
+
+<div class="about-hero">
+  <h1>About Natural Bloom</h1>
+  <p>
+    We blend tradition and nature to create gentle, effective self-care products for your daily rituals. Discover our story and what makes us unique.
+  </p>
+</div>
+
+<div class="about-section">
+  <div class="about-img-card">
+    <img src="{{ url_for('static', filename='css/uploads/labellogo.JPG') }}" alt="Natural Bloom Logo">
+  </div>
+  <div class="about-card">
+    <h2>Our Story</h2>
+    <p>
+      Natural Bloom was founded with a passion for reviving ancient Indian wellness traditions. We handcraft every product in small batches, using only the purest natural ingredients sourced from trusted local farmers.
+    </p>
+    <p>
+      Our range includes nourishing hair oils, herbal bath powders, and organic skincare—each inspired by time-tested Ayurvedic recipes and made with love.
+    </p>
+  </div>
+  <div class="about-card">
+    <h2>Why Choose Us?</h2>
+    <ul>
+      <li>100% natural, cruelty-free, and eco-friendly</li>
+      <li>Transparent sourcing and honest labeling</li>
+      <li>Handmade with love and respect for tradition</li>
+      <li>Personalized customer care and fast shipping</li>
+    </ul>
+    <p>
+      Thank you for supporting our journey. We’re honored to be a part of your wellness routine!
+    </p>
+  </div>
+</div>
+{% endblock %}

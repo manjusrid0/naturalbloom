@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  body {
+    background: #fdeef5; /* soft baby pink background */
+    font-family: "Montserrat", sans-serif; /* previous theme font */
+    color: #333;
+  }
+
+  .checkout-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+  }
+
+  .checkout-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 450px;
+    border: 2px solid #fddde6; /* subtle border to match theme */
+  }
+
+  .checkout-card h2 {
+    text-align: center;
+    color: #b8860b; /* gold from previous theme */
+    margin-bottom: 25px;
+    font-weight: 700;
+  }
+
+  .checkout-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .checkout-card label {
+    font-weight: 600;
+    color: #555; /* consistent label color */
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+
+  .checkout-card input,
+  .checkout-card textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #f4c2d7;
+    border-radius: 12px;
+    background: #fff6fa;
+    outline: none;
+    font-family: "Montserrat", sans-serif;
+    transition: border 0.2s, box-shadow 0.2s;
+  }
+
+  .checkout-card input:focus,
+  .checkout-card textarea:focus {
+    border-color: #b8860b; /* gold focus color */
+    box-shadow: 0 0 6px rgba(184, 134, 11, 0.3);
+  }
+
+  .checkout-card button {
+    padding: 14px;
+    background: linear-gradient(135deg, #f5d88b, #b8860b); /* gold gradient */
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .checkout-card button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(184, 134, 11, 0.3);
+  }
+</style>
+
+<div class="checkout-wrapper">
+  <div class="checkout-card">
+    <h2>Checkout</h2>
+    <form method="post">
+      <div>
+        <label>Name:</label>
+        <input type="text" name="name" required>
+      </div>
+
+      <div>
+        <label>Address:</label>
+        <textarea name="address" required rows="3"></textarea>
+      </div>
+
+      <div>
+        <label>Phone:</label>
+        <input type="text" name="phone" required>
+      </div>
+
+      <div>
+        <label>Email:</label>
+        <input type="email" name="email" required>
+      </div>
+
+      <button type="submit">Confirm Order</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

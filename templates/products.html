@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  body {
+    background: #f0f0f0; /* light gray background */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+  }
+
+  .products-page {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .products-page h2 {
+    color: #222; /* dark gray */
+    font-size: 32px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .products-page h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #bfa800, #a88f00); /* gold gradient */
+    margin: 8px auto 0 auto;
+    border-radius: 2px;
+  }
+
+  .products-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .cat-card {
+    flex: 1 1 250px;
+    max-width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff; /* white card */
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .cat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
+  }
+
+  .hero-card {
+    width: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    background: #eaeaea; /* light gray background */
+  }
+
+  .hero-card img {
+    width: 100%;
+    height: auto; 
+    display: block;
+    object-fit: contain;
+    padding: 10px;
+    background: #f5f5f5; /* subtle gray behind image */
+  }
+
+  .cat-card h3 {
+    font-size: 20px;
+    margin: 12px 0 6px 0;
+    color: #222; /* dark gray */
+  }
+
+  .cat-card .subtitle {
+    color: #bfa800; /* gold */
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .cat-card .price {
+    font-weight: 700;
+    font-size: 16px;
+    color: #bfa800; /* gold */
+  }
+
+  .cat-card .mrp {
+    font-weight: 400;
+    color: #888;
+    text-decoration: line-through;
+    margin-left: 6px;
+  }
+
+  .cat-card .view {
+    display: inline-block;
+    margin: 15px 0 15px 0;
+    padding: 10px 18px;
+    border-radius: 10px;
+    background: #333; /* dark gray button */
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .cat-card .view:hover {
+    background: #555;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Optional subtle background shapes */
+  .products-page::before {
+    content: "";
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, #bfa800 40%, transparent 70%);
+    border-radius: 90%;
+    opacity: 0.1;
+    z-index: 0;
+  }
+
+  .products-page::after {
+    content: "";
+    position: absolute;
+    bottom: -100px;
+    right: -100px;
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, #a88f00 40%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0.1;
+    z-index: 0;
+  }
+
+  @media(max-width: 768px) {
+    .products-cards {
+      gap: 20px;
+    }
+    .cat-card {
+      max-width: 120px;
+    }
+    .cat-card h3 {
+      font-size: 18px;
+    }
+  }
+</style>
+
+<div class="container products-page">
+  <h2>Shop All</h2>
+  <section class="products-cards container">
+    {% for p in products %}
+      <div class="cat-card">
+        <div class="hero-card">
+          <img src="{{ url_for('static', filename='css/uploads/' ~ p.image) }}" alt="{{ p.title }}">
+        </div>
+        <div style="text-align:center;padding:10px;">
+          <h3>{{ p.title }}</h3>
+          {% if p.subtitle %}<p class="subtitle">{{ p.subtitle }}</p>{% endif %}
+          <p class="price">Rs. {{ p.price }} <span class="mrp">{{ p.mrp }}</span></p>
+          <a class="view" href="{{ url_for('product_detail', slug=p.slug) }}">View</a>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}

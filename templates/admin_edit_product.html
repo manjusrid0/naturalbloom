@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+
+  .dashboard-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+
+  h2 {
+    color: #b8860b; /* Gold */
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+    color: #555;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+  }
+
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  textarea:focus {
+    border-color: #b8860b;
+    outline: none;
+  }
+
+  textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  .btn-success, .btn-danger {
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+    border: none;
+    margin-right: 10px;
+  }
+
+  .btn-success {
+    background-color: #b8860b;
+    color: #fff;
+  }
+
+  .btn-success:hover {
+    background-color: #a37508;
+  }
+
+  .btn-danger {
+    background-color: #d9534f;
+    color: #fff;
+  }
+
+  .btn-danger:hover {
+    background-color: #c12e2a;
+  }
+</style>
+
+<div class="dashboard-container">
+  <h2>Edit Product</h2>
+  <form method="post">
+    <label>Title:</label>
+    <input type="text" name="title" value="{{ product.title }}" required>
+
+    <label>Subtitle:</label>
+    <input type="text" name="subtitle" value="{{ product.subtitle }}">
+
+    <label>Quantity:</label>
+    <input type="text" name="qty" value="{{ product.qty }}" required>
+
+    <label>Price:</label>
+    <input type="number" name="price" value="{{ product.price }}" required>
+
+    <label>Best Before:</label>
+    <input type="text" name="best_before" value="{{ product.best_before }}">
+
+    <label>Image Filename:</label>
+    <input type="text" name="image" value="{{ product.image }}">
+
+    <label>Ingredients (comma separated):</label>
+    <input type="text" name="ingredients" value="{{ product.ingredients | join(',') }}">
+
+    <label>Directions:</label>
+    <textarea name="directions">{{ product.directions }}</textarea>
+
+    <button type="submit" class="btn btn-success">Update Product</button>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-danger">Cancel</a>
+  </form>
+</div>
+{% endblock %}

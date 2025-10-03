@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Other Works - Zeenat Mam</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f7f8f8, #808283 80%);
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #fff;
+            margin: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 2em 1em 1em 1em;
+            color: #e0a80d;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2em 1em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5em;
+            justify-content: center;
+        }
+
+        .card {
+            background: #1a1919;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 2px solid #f8f8f4;
+            width: 280px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px; /* Fixed height for uniformity */
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            padding: 1.2em;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 1.35em;
+            font-weight: 700;
+            color: #f8c80f; /* golden accent */
+            margin-bottom: 0.5em;
+        }
+
+        .sub-text {
+            font-size: 1em;
+            color: #e0e0e0; /* light gray for readability */
+            margin-bottom: 0.5em;
+        }
+
+        .highlight {
+            color: #ffd700; /* bright gold */
+            font-weight: 700;
+            margin-bottom: 0.5em;
+        }
+
+        .phone {
+            background: #333;
+            color: #fff;
+            padding: 0.3em 0.7em;
+            border-radius: 6px;
+            font-weight: 700;
+            margin-bottom: 0.5em;
+        }
+
+        .footer {
+            text-align: center;
+            color: #888;
+            font-size: 1em;
+            padding: 2em 0 1em 0;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .card {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Other Works by NaturalBloom</h1>
+    </header>
+
+    <div class="container">
+        <!-- Health Mix Card -->
+        <div class="card">
+            <img src="{{ url_for('static', filename='css/uploads/healthmix.JPG') }}" alt="healthmix">
+            <div class="card-content">
+                <div class="title">Health Mix</div>
+                <div class="sub-text">Available for order ✨💖</div>
+                <div class="phone">7449299859</div>
+            </div>
+        </div>
+
+        <!-- Haircut Card -->
+        <div class="card">
+            <img src="{{ url_for('static', filename='css/uploads/haircut.JPG') }}" alt="haircut">
+            <div class="card-content">
+                <div class="title">Haircut 💇‍♀️</div>
+                <div class="sub-text">Professional haircuts available</div>
+                <div class="highlight">Book Now 🔥</div>
+            </div>
+        </div>
+
+        <!-- Facial Card -->
+        <div class="card">
+            <img src="{{ url_for('static', filename='css/uploads/facial.JPG') }}" alt="Facial">
+            <div class="card-content">
+                <div class="title">Facial 💆‍♀️</div>
+                <div class="sub-text">Rejuvenating facial treatments</div>
+                <div class="highlight">Available 💯✨</div>
+            </div>
+        </div>
+
+        <!-- Mehndi Card -->
+        <div class="card">
+            <img src="{{ url_for('static', filename='css/uploads/mehndi.JPG') }}" alt="mehndi">
+            <div class="card-content">
+                <div class="title">Mehndi 🧕</div>
+                <div class="sub-text">Beautiful mehndi designs</div>
+                <div class="highlight">Book Now 🔥</div>
+            </div>
+        </div>
+
+        <!-- Bridal Makeup Card -->
+        <div class="card">
+            <img src="{{ url_for('static', filename='css/uploads/bridal_makeup.JPG') }}"  alt="Bridal Makeup">
+            <div class="card-content">
+                <div class="title">Bridal Makeup 💄</div>
+                <div class="sub-text">Expert bridal makeup services</div>
+                <div class="highlight">Available 💯✨</div>
+            </div>
+        </div>
+
+        <!-- Saree Draping Card -->
+        <div class="card">
+            <img src="{{ url_for('static', filename='css/uploads/saree_draping.JPG') }}" alt="Saree Draping">
+            <div class="card-content">
+                <div class="title">Saree Pre-Pleating & Draping 🎉</div>
+                <div class="sub-text">Elegant saree draping for all occasions</div>
+                <div class="highlight">Book Now 💖🔥</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2025 NaturalBloom | All rights reserved.
+    </div>
+
+</body>
+</html>

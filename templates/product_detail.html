@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(135deg, #f0f0f0, #d9d9d9); /* light gray gradient */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+  }
+
+  .product-page {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 18px;
+    background: #fff; /* white background */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* subtle black shadow */
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Abstract background shapes */
+  .product-page::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, #d4af37 35%, transparent 70%); /* gold */
+    border-radius: 50%;
+    opacity: 0.25;
+  }
+  .product-page::after {
+    content: "";
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, #bfa800 40%, transparent 70%); /* darker gold */
+    border-radius: 50%;
+    opacity: 0.25;
+  }
+
+  .left {
+    flex: 1;
+    min-width: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5; /* light gray */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .right {
+    flex: 1;
+    min-width: 350px;
+    background: #fff; /* white */
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .right h1 {
+    color: #333; /* dark gray */
+    margin-bottom: 10px;
+  }
+
+  .right .subtitle {
+    color: #bfa800; /* gold */
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+
+  .right .desc {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  .right h4 {
+    margin-top: 15px;
+    color: #333;
+  }
+
+  .right ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 20px;
+  }
+
+  .right ul li {
+    background: #f0f0f0; /* grayish white */
+    margin: 6px 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    color: #222;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .purchase {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #f8f8f8;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #bfa800; /* gold */
+  }
+
+  .meta {
+    font-size: 13px;
+    margin: 8px 0 15px;
+    color: #555;
+  }
+
+  .actions button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .add-to-cart-btn {
+    background: linear-gradient(135deg, #333, #555); /* dark gray gradient */
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  .add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #555, #333);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .buy-now-btn {
+    background: #bfa800; /* gold */
+    color: #000;
+    box-shadow: 0 4px 8px rgba(191, 168, 0, 0.3);
+  }
+  .buy-now-btn:hover {
+    background: #a88f00;
+    box-shadow: 0 6px 12px rgba(168, 143, 0, 0.4);
+  }
+
+  /* Image style */
+  .left img {
+    width: 100%;
+    max-width: 420px;
+    height: 420px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #eaeaea; /* subtle gray behind image */
+  }
+</style>
+
+<div class="container product-page">
+  <div class="left">
+    <img src="{{ url_for('static', filename='css/uploads/' ~ product.image) }}" alt="{{ product.title }}">
+  </div>
+  <div class="right">
+    <h1>{{ product.title }}</h1>
+    {% if product.subtitle %}<h3 class="subtitle">{{ product.subtitle }}</h3>{% endif %}
+    <p class="desc">{{ product.directions }}</p>
+
+    {% if product.ingredients %}
+    <h4>Key Ingredients</h4>
+    <ul>
+      {% for i in product.ingredients %}<li>{{ i }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="purchase">
+      <div class="price">Rs. {{ product.price }}</div>
+      <div class="meta">Net Qty: {{ product.qty }} • Best before: {{ product.best_before }}</div>
+      <div class="actions" style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="add-to-cart-btn">Add To Cart</button>
+        <button class="buy-now-btn">Buy Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function getCartCount() {
+  return parseInt(localStorage.getItem('cart_count') || '0');
+}
+function setCartCount(count) {
+  localStorage.setItem('cart_count', count);
+  var badge = document.getElementById('cartCount');
+  if (badge) badge.textContent = count;
+}
+function addToCart() {
+  let count = getCartCount() + 1;
+  setCartCount(count);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var addBtn = document.querySelector('.add-to-cart-btn');
+  if (addBtn) addBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    addToCart();
+  });
+  var buyBtn = document.querySelector('.buy-now-btn');
+  if (buyBtn) buyBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    addToCart();
+    window.location.href = '/checkout?product_slug={{ product.slug }}';
+  });
+});
+</script>
+{% endblock %}

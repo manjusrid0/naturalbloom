@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Natural Bloom</title>
+  <link rel="icon" href="{{ url_for('static', filename='uploads/labellogo.jpg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/orchid-styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* BODY */
+    body {
+      background: #f5f5f5; /* light gray */
+      min-height: 100vh;
+      font-family: "Montserrat", sans-serif;
+      color: #333;
+    }
+
+    /* HEADER */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+      background: #fff; /* white */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo img {
+      height: 54px;
+      width: auto;
+      display: block;
+      border-radius: 6px;
+      border: 1px solid #b8860b; /* gold border */
+    }
+
+    .logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #b8860b; /* gold */
+      letter-spacing: 1px;
+    }
+
+    /* NAVIGATION */
+    nav.nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      color: #333; /* dark gray */
+      transition: color 0.2s ease;
+    }
+
+    nav.nav a:hover {
+      color: #b8860b; /* gold on hover */
+    }
+
+    /* CART ICON */
+    .cart-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.8rem;
+      color: #333;
+      margin-left: 18px;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: #b8860b; /* gold badge */
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      padding: 2px 7px;
+      font-weight: bold;
+      min-width: 22px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      padding: 30px 20px;
+    }
+
+    /* FOOTER */
+    .site-footer {
+      background: #333; /* dark gray */
+      color: #f5f5f5;
+      padding: 30px 20px;
+      margin-top: 50px;
+    }
+
+    .site-footer h4 {
+      color: #b8860b; /* gold */
+      margin-bottom: 10px;
+    }
+
+    .site-footer p {
+      color: #ccc;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+    .nav-cart {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px; /* small space between icon and count */
+  color: #fff; /* navbar text color */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-cart .cart-count {
+  background-color: #ff4081;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  position: relative; /* can also use absolute if you want it on top of icon */
+}
+
+    /* BUTTONS (global) */
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 6px;
+      border: 1px solid #b8860b;
+      background-color: #fff;
+      color: #b8860b;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: #b8860b;
+      color: #fff;
+      border-color: #b8860b;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav.nav a {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='css/uploads/labellogo.JPG') }}" alt="Natural Bloom Logo">
+      <span>Natural Bloom</span>
+    </div>
+    <nav class="nav">
+  
+      <span class="cart-icon" id="cartIcon">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h7.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge" id="cartCount">0</span>
+      </span>
+      <a href="/">Home</a>
+      <a href="/products">Products</a>
+      <a href="/admin/login">Admin</a>
+      <a href="/about">About</a>
+      <a href="/other-works">Other Works</a>
+      
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Natural Bloom</h4>
+          <p>Manufactured & Marketed by Natural Bloom — 194, Sri Sakthi Nagar, Gandhinagar post, Kurinjipadi Taluk, Cuddalore-607308</p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>Phone: +91-7449299859<br>Email: naturalbloomcare@hotmail.com</p>
+        </div>
+        <div>
+          <h4>Follow</h4>
+          <p>Facebook • Instagram • YouTube</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Cart logic
+    function getCartCount() {
+      return parseInt(localStorage.getItem('cart_count') || '0');
+    }
+    function setCartCount(count) {
+      localStorage.setItem('cart_count', count);
+      document.getElementById('cartCount').textContent = count;
+    }
+    function addToCart() {
+      let count = getCartCount() + 1;
+      setCartCount(count);
+    }
+    <span class="cart-icon" id="cartIcon" style="cursor:pointer; position:relative; display:flex; align-items:center;">
+  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <circle cx="9" cy="21" r="1"/>
+    <circle cx="20" cy="21" r="1"/>
+    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h7.72a2 2 0 0 0 2-1.61L23 6H6"/>
+  </svg>
+  <span class="cart-badge" id="cartCount" style="position:absolute; top:-6px; right:-10px; background:#b8860b; color:#fff; border-radius:50%; padding:2px 6px; font-size:0.8rem;">0</span>
+</span>
+
+    // Set initial cart count
+    setCartCount(getCartCount());
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          addToCart();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
