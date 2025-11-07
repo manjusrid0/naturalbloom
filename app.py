@@ -67,17 +67,43 @@ def utility_processor():
 @app.route("/")
 def home():
     return render_template("home.html", products=PRODUCTS)
-
 @app.route("/products")
 def products():
     return render_template("products.html", products=PRODUCTS)
 
 @app.route("/product/<slug>")
 def product_detail(slug):
-    prod = next((p for p in PRODUCTS if p["slug"] == slug), None)
-    if not prod:
+    product = next((p for p in PRODUCTS if p["slug"] == slug), None)
+    if not product:
         abort(404)
-    return render_template("product_detail.html", product=prod)
+    return render_template("product_detail.html", product=product)
+
+
+@app.route("/add_to_cart/<int:product_id>", methods=["POST"])
+def add_to_cart(product_id):
+    product = next((p for p in PRODUCTS if p["id"] == product_id), None)
+    if not product:
+        abort(404)
+    cart = session.get("cart", [])
+    if product not in cart:
+        cart.append(product)
+    session["cart"] = cart
+    return {"success": True, "cart_count": len(cart)}
+
+@app.route("/cart")
+def cart():
+    cart = session.get("cart", [])
+    return render_template("cart.html", cart=cart)
+
+@app.route("/remove_from_cart/<int:product_id>", methods=["POST"])
+def remove_from_cart(product_id):
+    cart = session.get("cart", [])
+    cart = [p for p in cart if p["id"] != product_id]
+    session["cart"] = cart
+    return {"success": True, "cart_count": len(cart)}
+
+
+
 
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
@@ -226,6 +252,5 @@ def admin_delete_order(order_id):
 
     # Redirect back to the admin dashboard
     return redirect(url_for('admin_dashboard'))
-
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,253 +1,350 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Natural Bloom</title>
-  <link rel="icon" href="{{ url_for('static', filename='uploads/labellogo.jpg') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/orchid-styles.css') }}">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
-    /* BODY */
     body {
-      background: #f5f5f5; /* light gray */
-      min-height: 100vh;
-      font-family: "Montserrat", sans-serif;
-      color: #333;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #f9f9f9;
+      overflow-x: hidden;
     }
 
-    /* HEADER */
-    .site-header {
+    /* Navbar */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 10px 20px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 16px 32px;
-      background: #fff; /* white */
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      align-items: center;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
     }
 
-    .logo {
+    header h1 {
+      font-size: 1.5rem;
+      color: #b8860b;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    nav {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .logo img {
-      height: 54px;
-      width: auto;
-      display: block;
-      border-radius: 6px;
-      border: 1px solid #b8860b; /* gold border */
-    }
-
-    .logo span {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: #b8860b; /* gold */
-      letter-spacing: 1px;
-    }
-
-    /* NAVIGATION */
-    nav.nav a {
-      margin-left: 20px;
+    nav a {
       text-decoration: none;
-      font-weight: 600;
-      color: #333; /* dark gray */
-      transition: color 0.2s ease;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
     }
 
-    nav.nav a:hover {
-      color: #b8860b; /* gold on hover */
+    nav a:hover {
+      color: #b8860b;
     }
 
-    /* CART ICON */
     .cart-icon {
       position: relative;
-      display: flex;
-      align-items: center;
       cursor: pointer;
-      font-size: 1.8rem;
-      color: #333;
-      margin-left: 18px;
+      margin-right: 10px;
     }
 
     .cart-badge {
       position: absolute;
-      top: -8px;
-      right: -10px;
-      background: #b8860b; /* gold badge */
-      color: #fff;
+      top: -5px;
+      right: -8px;
+      background: #b8860b;
+      color: white;
+      font-size: 12px;
+      padding: 2px 5px;
       border-radius: 50%;
-      font-size: 0.9rem;
-      padding: 2px 7px;
-      font-weight: bold;
-      min-width: 22px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
-    /* MAIN CONTENT */
-    main {
-      padding: 30px 20px;
-    }
-
-    /* FOOTER */
-    .site-footer {
-      background: #333; /* dark gray */
-      color: #f5f5f5;
-      padding: 30px 20px;
-      margin-top: 50px;
-    }
-
-    .site-footer h4 {
-      color: #b8860b; /* gold */
-      margin-bottom: 10px;
-    }
-
-    .site-footer p {
-      color: #ccc;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
-    }
-    .nav-cart {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px; /* small space between icon and count */
-  color: #fff; /* navbar text color */
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.nav-cart .cart-count {
-  background-color: #ff4081;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 12px;
-  position: relative; /* can also use absolute if you want it on top of icon */
-}
-
-    /* BUTTONS (global) */
-    .btn {
-      display: inline-block;
-      padding: 8px 16px;
-      font-weight: 600;
-      font-size: 14px;
-      border-radius: 6px;
-      border: 1px solid #b8860b;
-      background-color: #fff;
-      color: #b8860b;
+    /* Hamburger for mobile */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
       cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s ease;
     }
 
-    .btn:hover {
-      background-color: #b8860b;
-      color: #fff;
-      border-color: #b8860b;
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #333;
+      margin: 4px 0;
+      border-radius: 2px;
     }
 
-    /* RESPONSIVE */
-    @media(max-width:768px){
-      .site-header {
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    @media(max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: #fff;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        gap: 20px;
+        padding: 15px 0;
+        border-top: 1px solid #ddd;
+        display: none;
       }
-      nav.nav a {
-        margin-left: 0;
-        margin-top: 10px;
+
+      .nav-links.active {
+        display: flex;
       }
+
+      header h1 { font-size: 1.2rem; }
+    }
+
+    /* Hero Carousel */
+    .hero-carousel-container {
+      width: 100%;
+      height: 65vh;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 100%;
+      height: 100%;
+      transition: left 1.3s ease-in-out;
+    }
+
+    .hero-slide.active {
+      left: 0;
+      z-index: 2;
+    }
+
+    .hero-slide.prev {
+      left: -100%;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .hero-badges {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .hero-badge {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      border: 1px solid #b8860b;
+      transition: background 0.4s;
+    }
+
+    .hero-badge.active {
+      background: #b8860b;
+    }
+
+    /* Product Cards */
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding: 0 10px;
+      margin: 30px 0;
+    }
+
+    .cat-card {
+      flex: 1 1 180px;
+      max-width: 220px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .cat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .cat-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+      background-color: #fff;
+    }
+
+    .cat-card h3 {
+      font-size: 16px;
+      margin: 8px 0;
+      color: #b8860b;
+    }
+
+    .price {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .add-to-cart-btn {
+      margin: 8px 0 14px;
+      padding: 8px 16px;
+      background: #b8860b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .add-to-cart-btn:hover {
+      background: #8c6c09;
+    }
+
+    footer {
+      text-align: center;
+      background: #fff;
+      padding: 20px;
+      font-size: 14px;
+      color: #777;
+      border-top: 1px solid #ddd;
+      margin-top: 40px;
+    }
+
+    @media(max-width: 768px) {
+      .hero-carousel-container { height: 45vh; }
+      .cat-card img { height: 120px; }
+      .cat-card { max-width: 160px; }
+      .categories { gap: 12px; }
     }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="logo">
-      <img src="{{ url_for('static', filename='css/uploads/labellogo.JPG') }}" alt="Natural Bloom Logo">
-      <span>Natural Bloom</span>
+
+  <!-- Navbar -->
+  <header>
+    <h1>Natural Bloom</h1>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span><span></span><span></span>
     </div>
-    <nav class="nav">
-  
-      <span class="cart-icon" id="cartIcon">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h7.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        <span class="cart-badge" id="cartCount">0</span>
-      </span>
-      <a href="/">Home</a>
-      <a href="/products">Products</a>
-      <a href="/admin/login">Admin</a>
-      <a href="/about">About</a>
-      <a href="/other-works">Other Works</a>
-      
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <span class="cart-icon" id="cartIcon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h7.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          <a href="{{ url_for('cart') }}" class="cart-icon">
+         <span id="cart-count" class="cart-count">{{ cart_count or 0 }}</span>
+      </a>
+        </span>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="/products">Products</a>
+        <a href="{{ url_for('admin_login') }}">Admin</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('other_works') }}">Other Works</a>
+      </div>
     </nav>
   </header>
 
+  <!-- Main Block -->
   <main>
     {% block content %}{% endblock %}
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h4>Natural Bloom</h4>
-          <p>Manufactured & Marketed by Natural Bloom — 194, Sri Sakthi Nagar, Gandhinagar post, Kurinjipadi Taluk, Cuddalore-607308</p>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <p>Phone: +91-7449299859<br>Email: naturalbloomcare@hotmail.com</p>
-        </div>
-        <div>
-          <h4>Follow</h4>
-          <p>Facebook • Instagram • YouTube</p>
-        </div>
-      </div>
-    </div>
+  <!-- Footer -->
+  <footer>
+    © 2025 Natural Bloom | All Rights Reserved.
   </footer>
 
+  <!-- JS: Hamburger Menu -->
   <script>
-    // Cart logic
-    function getCartCount() {
-      return parseInt(localStorage.getItem('cart_count') || '0');
-    }
-    function setCartCount(count) {
-      localStorage.setItem('cart_count', count);
-      document.getElementById('cartCount').textContent = count;
-    }
-    function addToCart() {
-      let count = getCartCount() + 1;
-      setCartCount(count);
-    }
-    <span class="cart-icon" id="cartIcon" style="cursor:pointer; position:relative; display:flex; align-items:center;">
-  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-    <circle cx="9" cy="21" r="1"/>
-    <circle cx="20" cy="21" r="1"/>
-    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h7.72a2 2 0 0 0 2-1.61L23 6H6"/>
-  </svg>
-  <span class="cart-badge" id="cartCount" style="position:absolute; top:-6px; right:-10px; background:#b8860b; color:#fff; border-radius:50%; padding:2px 6px; font-size:0.8rem;">0</span>
-</span>
-
-    // Set initial cart count
-    setCartCount(getCartCount());
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          addToCart();
-        });
-      });
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
     });
   </script>
+
+  <!-- JS: Wipe Carousel -->
+  <script>
+    const slides = document.querySelectorAll('.hero-slide');
+    const badges = document.querySelectorAll('.hero-badge');
+    let index = 0;
+
+    function showSlide(newIndex) {
+      const current = slides[index];
+      const next = slides[newIndex];
+      current.classList.remove('active');
+      current.classList.add('prev');
+      next.classList.add('active');
+      badges[index].classList.remove('active');
+      badges[newIndex].classList.add('active');
+
+      setTimeout(() => current.classList.remove('prev'), 1300);
+      index = newIndex;
+    }
+
+    if (slides.length) {
+      setInterval(() => {
+        let nextIndex = (index + 1) % slides.length;
+        showSlide(nextIndex);
+      }, 3000);
+    }
+  </script>
+
+  <!-- JS: Add-to-Cart -->
+   <script>
+    // Add to Cart Logic
+    document.addEventListener("click", async (e) => {
+      if (e.target.classList.contains("add-to-cart-btn")) {
+        const id = e.target.dataset.id;
+        const res = await fetch(`/add_to_cart/${id}`, { method: "POST" });
+        const data = await res.json();
+        document.getElementById("cart-count").textContent = data.cart_count;
+        alert("Product added to cart!");
+      }
+      if (e.target.classList.contains("remove-btn")) {
+        const id = e.target.dataset.id;
+        const res = await fetch(`/remove_from_cart/${id}`, { method: "POST" });
+        const data = await res.json();
+        document.getElementById("cart-count").textContent = data.cart_count;
+        e.target.closest(".cart-item").remove();
+      }
+    });
+  </script>
+
 </body>
 </html>
